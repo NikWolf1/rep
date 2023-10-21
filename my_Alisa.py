@@ -94,6 +94,59 @@ elif speech == 'какое сегодня число' or speech == 'какое �
 
     while pygame.mixer.music.get_busy():
         pygame.event.poll()
+elif speech == 'какой сегодня день недели' or speech == 'какой сегодня день':
+    today = datetime.today()
+    today = today.weekday()
+    if today == 0:
+        today = 'понедельник'
+    elif today == 1:
+        today = 'вторник'
+    elif today == 2:
+        today = 'среда'
+    elif today == 3:
+        today = 'четверг'
+    elif today == 4:
+        today = 'пятница'
+    elif today == 5:
+        today = 'суббота'
+    elif today == 6:
+        today = 'воскресенье'
+    my_file = open('file2.txt', 'w', encoding='UTF-8')
+    my_file.write(f'сегодня {today}')
+    my_file.close()
+
+    my_file = open('file2.txt', 'r', encoding='UTF-8')
+    my_text = my_file.read()
+    my_file.close()
+
+    tts = gTTS(text=my_text, lang='ru')
+    tts.save('audio8.mp3')
+    
+    pygame.init()
+    pygame.mixer.music.load('audio8.mp3')
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        pygame.event.poll()
+elif speech =='скажи что-нибудь на английском':
+    n = "hello, i'm program Nik"
+    my_file = open('file2.txt', 'w', encoding='UTF-8')
+    my_file.write(n)
+    my_file.close()
+
+    my_file = open('file2.txt', 'r', encoding='UTF-8')
+    my_text = my_file.read()
+    my_file.close()
+
+    tts = gTTS(text=my_text, lang='en')
+    tts.save('audio8.mp3')
+    
+    pygame.init()
+    pygame.mixer.music.load('audio8.mp3')
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+        pygame.event.poll()
 elif speech == 'кто самый лучший программист' or speech == 'какой программист самый лучший':
     n = 'самый лучший программист Никита Липский, псевдоним Никитиус Wolf'
     record1()
